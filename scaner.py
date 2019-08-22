@@ -23,7 +23,7 @@ def parse_one_block(client, store, number):
         time_stamp = block['block_header']['raw_data']["timestamp"]
     oft_trxs = []
     for trx in trxs:
-        if trx['ret'][0]['contractRet'] == 'OUT_OF_TIME':
+        if trx.has_key('ret') and trx['ret'][0]['contractRet'] == 'OUT_OF_TIME':
             oft_trxs.append(trx)
 
     witness_address = block['block_header']['raw_data']["witness_address"]
