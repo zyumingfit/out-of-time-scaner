@@ -189,14 +189,14 @@ def query(recent_days = 0, min_block = 0, max_block = 0):
     start_timestamp = store.get_block_time(process_start)
     end_timestamp = store.get_block_time(process_end)
 
-    templ = '%-45s %-40s %-15s %-15s'
+    templ = '%-45s %-40s %-15s'
     util.status_msg_div()
     util.status_msg('     Time Range:', '%s ~ %s' % (util.timestamp_to_strftime(start_timestamp), util.timestamp_to_strftime(end_timestamp)))
     util.status_msg('TimeStamp Range:', '%d ~ %d' % (start_timestamp, end_timestamp))
     util.status_msg('    Block Range:', '%d ~ %d' % (process_start, process_end))
     util.status_msg_div()
     print fire.core.formatting.Bold(
-        templ % ('SR Address', 'SR NAME','OutOfTime Txs', 'Total Blocks')
+        templ % ('SR Address', 'SR NAME','OutOfTime Txs')
     )
     for sr in srs:
         if witnesses.has_key(sr):
@@ -205,8 +205,7 @@ def query(recent_days = 0, min_block = 0, max_block = 0):
             sr_name = '-'
         if srs_cnts_map.has_key(sr):
             oft_cnt = srs_cnts_map[sr]
-            block_cnt = store.get_sr_blocks_cnts(sr)
-            print(templ %(sr, sr_name, oft_cnt, block_cnt))
+            print(templ %(sr, sr_name, oft_cnt))
 
 def txs(witness, recent_days = 0, min_block = 0, max_block = 0):
     store = Store()
